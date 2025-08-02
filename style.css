@@ -68,20 +68,18 @@ button:hover {
 }
 
 .delete-btn {
-    background-color: #e53935;
-    /* red */
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    cursor: pointer;
-    border-radius: 4px;
-    font-size: 0.9rem;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 4px;
 }
 
 .delete-btn:hover {
-    background-color: #c62828;
-    /* darker red on hover */
+  background-color: #c0392b;
 }
+
 
 
 footer {

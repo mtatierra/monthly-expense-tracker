@@ -2,153 +2,159 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Monthly Expense Tracker</title>
-    <link rel="stylesheet" href="style.css" />
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js CDN -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Monthly Expense Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js CDN -->
 </head>
 
 <body>
 
-    <header>
-        <h1>Monthly Expense Tracker</h1>
-    </header>
+  <header>
+    <h1>Monthly Expense Tracker</h1>
+  </header>
 
-    <main>
-        <!-- Month Filter -->
-        <div class="month-filter-group">
-            <label for="month-filter">Filter by Month:</label>
-            <input type="month" id="month-filter" />
+  <main>
+
+    <!-- Month Filter -->
+    <div class="month-filter-group">
+      <label for="month-filter">Filter by Month:</label>
+      <input type="month" id="month-filter" />
+    </div>
+
+    <!-- Monthly Budget Section -->
+    <form id="budget-form">
+      <div class="budget-group">
+        <label for="budget-claire">Claire (CAT):</label>
+        <input type="number" id="budget-claire" placeholder="₱0.00" step="0.01" />
+      </div>
+      <div class="budget-group">
+        <label for="budget-marbs">Marbs (MCT):</label>
+        <input type="number" id="budget-marbs" placeholder="₱0.00" step="0.01" />
+      </div>
+      <div class="budget-group">
+        <label>Overall Budget:</label>
+        <p id="budget-total-display">₱0.00</p>
+        <!-- ✅ NEW: Budget summary output -->
+        <div id="budget-summary-output"></div>
+      </div>
+    </form>
+
+    <!-- Expense Input Form -->
+    <section id="expense-form">
+      <h2>Add New Expense</h2>
+      <form id="add-expense-form">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Description</th>
+              <th>Amount</th>
+              <th>Category</th>
+              <th>Name</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <label for="date" class="visually-hidden">Date</label>
+                <input type="date" id="date" name="date" required />
+              </td>
+              <td>
+                <label for="description" class="visually-hidden">Description</label>
+                <input type="text" id="description" name="description" placeholder="e.g., Grocery" required />
+              </td>
+              <td>
+                <label for="amount" class="visually-hidden">Amount</label>
+                <input type="number" id="amount" name="amount" placeholder="0.00" step="0.01" required />
+              </td>
+              <td>
+                <label for="category" class="visually-hidden">Category</label>
+                <select id="category" name="category" required>
+                  <option value="">Select</option>
+                  <option value="Food">Food</option>
+                  <option value="Home Expenses">Home Expenses</option>
+                  <option value="Wedding Fund">Wedding Fund</option>
+                  <option value="Transport">Transport</option>
+                  <option value="Utilities">Utilities</option>
+                  <option value="Entertainment">Entertainment</option>
+                  <option value="Other">Other</option>
+                </select>
+              </td>
+              <td>
+                <label for="name" class="visually-hidden">Name</label>
+                <select id="name" name="name" required>
+                  <option value=""></option>
+                  <option value="Claire">CAT</option>
+                  <option value="Marbs">MCT</option>
+                </select>
+              </td>
+              <td>
+                <button type="submit">Add</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- ✅ NEW: Form status message placeholder -->
+        <div id="form-status-message"></div>
+      </form>
+    </section>
+
+    <!-- Expense List Display -->
+    <section id="expense-list">
+      <h2>Expense List</h2>
+      <table id="expenses-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Category</th>
+            <th>Name</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Expenses will be added here dynamically -->
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Monthly Summary -->
+    <section id="summary">
+      <h2>Summary</h2>
+
+      <div id="summary-flex-container">
+        <div id="summary-by-name">
+          <h3>By Name</h3>
         </div>
-        <!--<section id="filters">
-            <label for="month-filter">Filter by Month:</label>
-            <input type="month" id="month-filter" />
-        </section>-->
+        <div id="summary-by-category">
+          <h3>By Category</h3>
+        </div>
+      </div>
 
-        <!-- Monthly Budget Section -->
-        <form id="budget-form">
-            <div class="budget-group">
-                <label for="budget-claire">Claire (CAT):</label>
-                <input type="number" id="budget-claire" placeholder="₱0.00" step="0.01" />
-            </div>
-            <div class="budget-group">
-                <label for="budget-marbs">Marbs (MCT):</label>
-                <input type="number" id="budget-marbs" placeholder="₱0.00" step="0.01" />
-            </div>
-            <div class="budget-group">
-                <label>Overall Budget:</label>
-                <p id="budget-total-display">₱0.00</p>
-            </div>
-        </form>
+      <div id="charts">
+        <h3>Visual Summary</h3>
+        <canvas id="categoryChart" width="400" height="200"></canvas>
+        <canvas id="nameChart" width="400" height="200"></canvas>
+      </div>
+    </section>
+  </main>
 
-        <!-- Expense Input Form -->
-        <section id="expense-form">
-            <h2>Add New Expense</h2>
-            <form id="add-expense-form">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Description</th>
-                            <th>Amount</th>
-                            <th>Category</th>
-                            <th>Name</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <label for="date" class="visually-hidden">Date</label>
-                                <input type="date" id="date" name="date" required>
-                            </td>
-                            <td>
-                                <label for="description" class="visually-hidden">Description</label>
-                                <input type="text" id="description" name="description" placeholder="e.g., Grocery"
-                                    required>
-                            </td>
-                            <td>
-                                <label for="amount" class="visually-hidden">Amount</label>
-                                <input type="number" id="amount" name="amount" placeholder="0.00" step="0.01" required>
-                            </td>
-                            <td>
-                                <label for="category" class="visually-hidden">Category</label>
-                                <select id="category" name="category" required>
-                                    <option value="">Select</option>
-                                    <option value="Food">Food</option>
-                                    <option value="Home Expenses">Home Expenses</option>
-                                    <option value="Wedding Fund">Wedding Fund</option>
-                                    <option value="Transport">Transport</option>
-                                    <option value="Utilities">Utilities</option>
-                                    <option value="Entertainment">Entertainment</option>
-                                    <option value="Other">Other</option>
-                                </select>
-                            </td>
-                            <td>
-                                <label for="name" class="visually-hidden">Name</label>
-                                <select id="name" name="name" required>
-                                    <option value=""></option>
-                                    <option value="Claire">CAT</option>
-                                    <option value="Marbs">MCT</option>
-                                </select>
-                            </td>
-                            <td><button type="submit">Add</button></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </form>
-        </section>
+  <footer>
+    <p>❤️ Monthly Expense Tracker ❤️</p>
+  </footer>
 
-        <!-- Expense List Display -->
-        <section id="expense-list">
-            <h2>Expense List</h2>
-            <table id="expenses-table">
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Description</th>
-                        <th>Amount</th>
-                        <th>Category</th>
-                        <th>Name</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Expenses will be added here dynamically -->
-                </tbody>
-            </table>
-        </section>
+  <!-- ✅ JavaScript modules -->
+  <script type="module" src="js/main.js"></script>
 
-        <!-- Monthly Summary -->
-        <section id="summary">
-            <h2>Summary</h2>
-
-            <div id="summary-flex-container">
-                <div id="summary-by-name">
-                    <h3>By Name</h3>
-                    <!-- Totals per name go here -->
-                </div>
-                <div id="summary-by-category">
-                    <h3>By Category</h3>
-                    <!-- Totals per category go here -->
-                </div>
-            </div>
-
-            <div id="charts">
-                <h3>Visual Summary</h3>
-                <canvas id="categoryChart" width="400" height="200"></canvas>
-                <canvas id="nameChart" width="400" height="200"></canvas>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <p>❤️ Monthly Expense Tracker ❤️</p>
-    </footer>
-    <script type="module" src="js/main.js"></script>
-    <!--<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>-->
-    <!--<script type="module" src="js/darkmode-init.js"></script>-->
+  <!-- ✅ No-JavaScript warning -->
+  <noscript>
+    <p style="color: red;">This app requires JavaScript to function properly.</p>
+  </noscript>
 
 </body>
 
