@@ -1,0 +1,239 @@
+/* Reset some default browser styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+    color: #000000;
+}
+
+header {
+    background-color: #2f6d31;
+    color: rgb(241, 235, 235);
+    padding: 1rem;
+    text-align: center;
+}
+
+main {
+
+    padding: 20px;
+    max-width: 900px;
+    margin: auto;
+}
+
+section {
+
+    margin-bottom: 40px;
+}
+
+table {
+
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th,
+td {
+
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+
+    background-color: #f2f2f2;
+}
+
+input,
+select,
+button {
+
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.delete-btn {
+    background-color: #e53935;
+    /* red */
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.delete-btn:hover {
+    background-color: #c62828;
+    /* darker red on hover */
+}
+
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #f2f2f2;
+    font-size: 0.9rem;
+}
+
+/* Accessibility: Hidden but readable by screen readers */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+
+#summary-flex-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+#summary-by-name,
+#summary-by-category {
+    flex: 1 1 45%;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 6px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+#charts {
+  width: 100%;
+  max-width: 600px;         /* Optional: limit the width */
+  margin: 50px auto;        /* Centers the container horizontally */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#charts canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+
+#monthly-budget {
+    margin: 20px auto;
+    padding: 15px;
+    background: #e3f2fd;
+    border-radius: 8px;
+    max-width: 900px;
+}
+
+#budget-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+}
+
+.budget-group {
+    flex: 1 1 30%;
+}
+
+#budget-form input {
+    width: 100%;
+    padding: 5px;
+    font-size: 1rem;
+}
+
+#budget-summary-output {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+#expenses-table {
+  max-height: 300px;
+  overflow-y: auto;
+  display: block;
+}
+
+/* Dark mode override */
+body.dark {
+  background-color: #121212;
+  color: #f5f5f5;
+}
+
+body.dark input,
+body.dark select,
+body.dark textarea,
+body.dark button {
+  background-color: #2a2a2a;
+  color: #f5f5f5;
+  border-color: #444;
+}
+
+body.dark table {
+  background-color: #1e1e1e;
+  color: #f5f5f5;
+}
+
+body.dark th,
+body.dark td {
+  border-color: #333;
+}
+
+body.dark #expense-form,
+body.dark #expense-list,
+body.dark #monthly-budget,
+body.dark #summary {
+  background-color: #1a1a1a;
+  border-color: #444;
+}
+
+.month-filter-group {
+  margin: 1rem 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#month-filter {
+  width: 200px;               /* You can adjust this */
+  padding: 6px 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+  color: #333;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#month-filter:focus {
+  border-color: #4caf50;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+  outline: none;
+}
+
+/* Optional dark mode support if you're using darkmode.js */
+.darkmode--activated #month-filter {
+  background-color: #333;
+  color: #fff;
+  border-color: #666;
+}
