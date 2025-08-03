@@ -60,10 +60,20 @@ form.addEventListener("submit", async function (e) {
   await filterByMonthYear(currentFilter);
 
   form.reset();
+
+  // ✅ Fix floating labels after reset
+  if (window.M && M.updateTextFields) {
+    M.updateTextFields();
+  }
 });
 
 window.addEventListener("DOMContentLoaded", async () => {
   setupBudgetForm();
+
+  // ✅ Fix floating labels after form values are set in budgetForm.js
+  if (window.M && M.updateTextFields) {
+    M.updateTextFields();
+  }
 
   // Set default to current month
   const now = new Date();

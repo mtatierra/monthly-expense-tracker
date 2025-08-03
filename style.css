@@ -1,3 +1,6 @@
+/* Original CSS provided by the user */
+
+
 /* Reset some default browser styles */
 body {
     font-family: Arial, sans-serif;
@@ -234,4 +237,18 @@ body.dark #summary {
   background-color: #333;
   color: #fff;
   border-color: #666;
+}
+
+/* === Materialize enhancements === */
+input, select, textarea, button {
+  border-radius: 4px;
+}
+
+.card {
+  margin-bottom: 30px;
+}
+
+.responsive-chart {
+  max-width: 100%;
+  height: auto;
 }
